@@ -60,7 +60,7 @@ The Ride-Share project is a web application designed to facilitate shared rides 
 
 1. **Clone the repository**:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/thanasaksrisuwan/ride-share.git
     cd ride-share
     ```
 
