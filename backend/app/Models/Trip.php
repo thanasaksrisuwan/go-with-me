@@ -11,6 +11,22 @@ class Trip extends Model
 
     protected $guarded = [];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+        'start_location' => 'array',
+        'end_location' => 'array',
+        'driver_location' => 'array',
+        'is_started' => 'boolean',
+        'is_completed' => 'boolean',
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

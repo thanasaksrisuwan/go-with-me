@@ -10,12 +10,11 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        // validate phone
 
         $request->validate([
             'phone' =>'required|numeric|min:10',
         ]);
-        // create a user
+
         $user = User::firstOrCreate([
             'phone' => $request->phone
         ]);
@@ -24,9 +23,29 @@ class LoginController extends Controller
             return response()->json(['message' => 'error'], 401);
         }
 
-        // send the user code
         $user->notify(new LoginNoti());
 
-        // response
+        return response()->json(['message' => 'The message was sent.']);
+    }
+
+    public function verify(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|numeric|min:10',
+            'login_code' => 'required|numeric|between:111111,999999'
+        ]);
+
+        $user = User::where('phone', $request->phone)
+        ->where('login_code', $request->login_code)
+        ->first();
+
+        if ($user) {
+            $user->update([
+                'login_code' => null
+            ]);
+            return $user->createToken($request->login_code)->plainTextToken;
+        }
+
+        return response()->json(['message' => 'Invalid code.'], 401);
     }
 }
