@@ -11,6 +11,7 @@ The Ride-Share project is a web application designed to facilitate shared rides 
 - **Registration and Login**: Users can register and log in using their phone numbers.
 - **Authentication**: Secure authentication using Laravel Sanctum.
 - **User Profiles**: Users can update their profile information.
+- **Two-Factor Authentication**: Users receive a login code via SMS using Twilio for additional security.
 
 ### Driver Management
 
@@ -28,6 +29,7 @@ The Ride-Share project is a web application designed to facilitate shared rides 
 ### Notifications
 
 - **Real-time Updates**: Passengers and drivers receive real-time updates about the trip status and location using events and notifications.
+- **SMS Notifications**: Important notifications, including login codes, are sent via SMS using Twilio.
 
 ## API Endpoints
 
@@ -54,44 +56,6 @@ The Ride-Share project is a web application designed to facilitate shared rides 
 
 - `GET /user`: Get the logged-in user's profile.
 
-## Database Schema
-
-### Users Table
-
-- `id`: Primary key.
-- `name`: User's name.
-- `phone`: User's phone number (unique).
-- `login_code`: Code for login verification.
-- `remember_token`: Token for session management.
-- `created_at`: Timestamp when the user was created.
-- `updated_at`: Timestamp when the user was last updated.
-
-### Drivers Table
-
-- `id`: Primary key.
-- `user_id`: Foreign key to the users table.
-- `year`: Vehicle year.
-- `make`: Vehicle make.
-- `model`: Vehicle model.
-- `color`: Vehicle color.
-- `license_plate`: Vehicle license plate.
-- `created_at`: Timestamp when the driver profile was created.
-- `updated_at`: Timestamp when the driver profile was last updated.
-
-### Trips Table
-
-- `id`: Primary key.
-- `user_id`: Foreign key to the users table (passenger).
-- `driver_id`: Foreign key to the drivers table.
-- `is_started`: Boolean indicating if the trip has started.
-- `is_completed`: Boolean indicating if the trip has completed.
-- `start_location`: JSON containing the starting location.
-- `end_location`: JSON containing the ending location.
-- `destination_name`: Name of the destination.
-- `driver_location`: JSON containing the driver's current location.
-- `created_at`: Timestamp when the trip was created.
-- `updated_at`: Timestamp when the trip was last updated.
-
 ## Installation and Setup
 
 1. **Clone the repository**:
@@ -112,12 +76,21 @@ The Ride-Share project is a web application designed to facilitate shared rides 
     php artisan key:generate
     ```
 
-4. **Run migrations**:
+4. **Set up Twilio**:
+    - Sign up for a Twilio account and get your Twilio credentials (Account SID, Auth Token, and Phone Number).
+    - Add your Twilio credentials to the `.env` file:
+        ```
+        TWILIO_SID=your_twilio_sid
+        TWILIO_AUTH_TOKEN=your_twilio_auth_token
+        TWILIO_PHONE_NUMBER=your_twilio_phone_number
+        ```
+
+5. **Run migrations**:
     ```bash
     php artisan migrate
     ```
 
-5. **Start the development server**:
+6. **Start the development server**:
     ```bash
     php artisan serve
     npm run dev
