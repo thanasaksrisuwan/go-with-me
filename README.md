@@ -6,7 +6,7 @@ The Ride-Share project is a web application designed to facilitate shared rides 
 
 ## ⚠️ Warning
 
-**<span style="color:red;">This project is currently unfinished and may contain bugs or incomplete features. Use at your own risk.</span>**
+**This project is currently unfinished and may contain bugs or incomplete features. Use at your own risk.**
 
 ## Features
 
