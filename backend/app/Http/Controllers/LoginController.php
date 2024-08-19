@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\VerifyRequest;
 use App\Models\User;
 use App\Notifications\LoginNoti;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-
-        $request->validate([
-            'phone' =>'required|numeric|min:10',
-        ]);
-
         $user = User::firstOrCreate([
             'phone' => $request->phone
         ]);
@@ -32,15 +29,16 @@ class LoginController extends Controller
         return response()->json(['message' => 'The message was sent.']);
     }
 
-    public function verify(Request $request)
+    public function verify(VerifyRequest $request)
     {
         $request->validate([
             'phone' => 'required|numeric|min:10',
             'login_code' => 'required|numeric|between:111111,999999'
         ]);
 
-        $user = User::where('phone', $request->phone)
-        ->where('login_code', $request->login_code)
+        $user = User::query()
+        ->where('phone', '=', $request->phone)
+        ->where('login_code', '=', $request->login_code)
         ->first();
 
         if ($user) {
