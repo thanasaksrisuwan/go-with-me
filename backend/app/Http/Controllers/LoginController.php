@@ -23,7 +23,11 @@ class LoginController extends Controller
             return response()->json(['message' => 'error'], 401);
         }
 
-        $user->notify(new LoginNoti());
+        try {
+            $user->notify(new LoginNoti());
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 401);
+        }
 
         return response()->json(['message' => 'The message was sent.']);
     }
