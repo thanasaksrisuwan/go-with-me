@@ -2,3 +2,4 @@
 
 - Todo
   - Add Auth with email
+  - Update code to new laravel 11
