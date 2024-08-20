@@ -1,9 +1,5 @@
 # GO WITH ME(Unfinished)
 
-## Project Overview
-
-The Go with me project is a web application designed to facilitate shared rides between drivers and passengers. The application allows users to register as either a driver or a passenger and create, accept, start, and complete trips. The project uses Laravel for the backend and Vue.js for the frontend.
-
 ## ⚠️ Warning
 
 **This project is currently unfinished and may contain bugs or incomplete features. Use at your own risk.**
