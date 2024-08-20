@@ -6,7 +6,7 @@ trait ResponseHelper {
     
     public function successResponse($data, $message = 'Success', $statusCode = 200) {
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
             'message' => $message,
             'data' => $data
         ], $statusCode);

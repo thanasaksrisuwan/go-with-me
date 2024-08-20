@@ -2,42 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDriverRequest;
+use App\Services\DriverService;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
 {
+
+    protected $driverService;
+    public function __construct(DriverService $driverService) {
+        $this->driverService = $driverService;
+    }
     public function show(Request $request)
     {
-        $user = $request->user();
-        $user->load('driver');
-        return $user;
+        return $this->driverService->getDriver($request);
     }
 
-    public function update(Request $request)
+    public function update(StoreDriverRequest $request)
     {
-        $request->validate([
-            'year' => 'required|numeric|between:2010,2024',
-            'make' => 'required',
-            'model' => 'required',
-            'color' => 'required|alpha',
-            'license_plate' => 'required',
-            'name' => 'required'
-        ]);
-
-        $user = $request->user();
-
-        $user->update($request->only('name'));
-
-        $user->driver()->updateOrCreate($request->only([
-            'year',
-            'make',
-            'model',
-            'color',
-            'license_plate'
-        ]));
-
-        $user->load('driver');
-
-        return $user;
+        return $this->driverService->update($request);
     }
 }

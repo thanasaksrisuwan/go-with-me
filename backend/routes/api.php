@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/login/verify', [LoginController::class, 'verify']);
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/driver', [DriverController::class, 'show']);
     Route::post('/driver', [DriverController::class, 'update']);

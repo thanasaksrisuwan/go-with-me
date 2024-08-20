@@ -39,7 +39,7 @@ class LoginNoti extends Notification
             'login_code' => $loginCode,
         ]);
         return (new TwilioSmsMessage())
-        ->content('Your login code is {$loginCode}');
+        ->content("Your login code is $loginCode .");
     }
 
     /**
