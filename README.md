@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The Ride-Share project is a web application designed to facilitate shared rides between drivers and passengers. The application allows users to register as either a driver or a passenger and create, accept, start, and complete trips. The project uses Laravel for the backend and Vue.js for the frontend.
+The Go with me project is a web application designed to facilitate shared rides between drivers and passengers. The application allows users to register as either a driver or a passenger and create, accept, start, and complete trips. The project uses Laravel for the backend and Vue.js for the frontend.
 
 ## ⚠️ Warning
 
@@ -78,6 +78,16 @@ The Ride-Share project is a web application designed to facilitate shared rides 
     ```bash
     cp .env.example .env
     php artisan key:generate
+    ```
+  ** Passport  
+    ```bash
+    php artisan install:api --passport
+    php artisan passport:keys
+    php artisan vendor:publish --tag=passport-config
+    php artisan passport:client
+    php artisan passport:client --public
+    php artisan passport:client --client
+    php artisan passport:client --personal
     ```
 
 4. **Set up Twilio**:
